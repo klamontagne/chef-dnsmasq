@@ -9,6 +9,11 @@ local=/<%= @domain %>/
 # The IP range to allocate in the DHCP server
 dhcp-range=<%= @conf['dhcp_range'] %>
 
+<% if @conf['dns_servers'] %>
+# Alternate DNS servers
+dhcp-option=6,<%= @conf['dns_servers'].join(',') %>
+<% end %>
+
 # Static IP allocations
 <% @conf['dhcp_hosts'].to_a.each do |dhcp_host| %>
 dhcp-host=<%= dhcp_host %>
